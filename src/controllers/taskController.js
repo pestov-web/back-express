@@ -1,7 +1,7 @@
 const { prisma } = require('../utils/prisma');
 
 module.exports.addTask = async (req, res) => {
-  const { name, description = null, categoryId = 0 } = req.body;
+  const { name, description = null, categoryId = null } = req.body;
   const newTask = await prisma.tasks.create({
     data: {
       name,
@@ -13,14 +13,15 @@ module.exports.addTask = async (req, res) => {
 };
 
 module.exports.updateTask = async (req, res) => {
+  console.log(req.body);
   const updatedTask = await prisma.tasks.update({
     where: {
       id: req.body.id,
     },
     data: {
       name: req.body.name,
-      description: req.body.description,
-      categoryId: req.body.categoryId,
+      description: req.body.description || null,
+      categoryId: req.body.categoryId || null,
     },
   });
   res.send(updatedTask);

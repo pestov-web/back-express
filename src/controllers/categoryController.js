@@ -18,7 +18,7 @@ module.exports.updateCategory = async (req, res) => {
     },
     data: {
       name: req.body.name,
-      description: req.body.description,
+      description: req.body.description || null,
     },
   });
   res.send(updatedCategory);
