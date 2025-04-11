@@ -6,7 +6,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const db = require('./utils/prisma');
 const { logger, errorLogger } = require('./middlewares/logger');
 const { errors } = require('celebrate');
-// const errorsHandler = require('./middlewares/errorsHandler.js');
+
 const cors = require('cors');
 const helmet = require('helmet');
 const limiter = require('./middlewares/rateLimitter');
@@ -34,7 +34,6 @@ app.use(errorLogger);
 
 // Обработка ошибок
 app.use(errors()); // Celebrate
-// app.use(errorsHandler);
 
 const PORT = process.env.PORT || 8089;
 app.listen(PORT, () => {

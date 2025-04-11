@@ -6,28 +6,22 @@ const {
   deleteCategoryValidation,
 } = require('../middlewares/categoryValidation');
 
-router.get('/GetCategories', (req, res) => {
-  res.send('GetCategories');
-});
-router.post('/AddCategory', createCategoryValidation, (req, res) => {
-  res.send('CreateCategory');
-});
+const {
+  addCategory,
+  updateCategory,
+  removeCategory,
+  getCategories,
+} = require('../controllers/categoryController');
+
+router.get('/GetCategories', getCategories);
+router.post('/AddCategory', createCategoryValidation, addCategory);
 // Странная реализация в исходом апи, заменил ниже на PATCH, этот тоже оставил
-router.post('/UpdateCategory', updateCategoryValidation, (req, res) => {
-  res.send('UpdateCategory');
-});
+router.post('/UpdateCategory', updateCategoryValidation, updateCategory);
 // Странная реализация в исходом апи, заменил ниже на DELETE, этот тоже оставил
-router.get('/RemoveCategory', deleteCategoryValidation, (req, res) => {
-  res.send('DeleteCategory');
-});
+router.get('/RemoveCategory/:id', deleteCategoryValidation, removeCategory);
 
-// дополнительно реализовал
-router.patch('/UpdateCategory', updateCategoryValidation, (req, res) => {
-  res.send('UpdateCategory');
-});
-
-router.delete('/RemoveCategory', deleteCategoryValidation, (req, res) => {
-  res.send('DeleteCategory');
-});
+// дополнительно
+router.patch('/UpdateCategory', updateCategoryValidation, updateCategory);
+router.delete('/RemoveCategory/:id', deleteCategoryValidation, removeCategory);
 
 module.exports = router;

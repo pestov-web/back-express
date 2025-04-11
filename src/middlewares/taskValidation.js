@@ -1,5 +1,4 @@
 const { celebrate, Joi, Segments } = require('celebrate');
-const { number } = require('joi');
 
 exports.updateTaskValidation = celebrate({
   [Segments.BODY]: Joi.object({

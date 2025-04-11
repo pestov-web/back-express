@@ -6,27 +6,22 @@ const {
   deleteTaskValidation,
 } = require('../middlewares/taskValidation');
 
-router.get('/GetTasks', (req, res) => {
-  res.send('GetTasks');
-});
-router.post('/AddTask', createTaskValidation, (req, res) => {
-  res.send('CreateTask');
-});
-// Странная реализация в исходом апи, заменил ниже на PATCH, этот тоже оставил
-router.post('/UpdateTask', updateTaskValidation, (req, res) => {
-  res.send('UpdateTask');
-});
-// Странная реализация в исходом апи, заменил ниже на DELETE, этот тоже оставил
-router.get('/RemoveTask/:id', deleteTaskValidation, (req, res) => {
-  res.send('DeleteTask' + ' ' + req.params.id);
-});
+const {
+  addTask,
+  updateTask,
+  removeTask,
+  getTasks,
+} = require('../controllers/taskController');
 
-// дополнительно реализовал
-router.patch('/UpdateTask', updateTaskValidation, (req, res) => {
-  res.send('UpdateTask');
-});
-router.delete('/RemoveTask/:id', deleteTaskValidation, (req, res) => {
-  res.send('DeleteTask');
-});
+router.get('/GetTasks', getTasks);
+router.post('/AddTask', createTaskValidation, addTask);
+// Странная реализация в исходом апи, заменил ниже на PATCH, этот тоже оставил
+router.post('/UpdateTask', updateTaskValidation, updateTask);
+// Странная реализация в исходом апи, заменил ниже на DELETE, этот тоже оставил
+router.get('/RemoveTask/:id', deleteTaskValidation, removeTask);
+
+// дополнительно
+router.patch('/UpdateTask', updateTaskValidation, updateTask);
+router.delete('/RemoveTask/:id', deleteTaskValidation, removeTask);
 
 module.exports = router;
