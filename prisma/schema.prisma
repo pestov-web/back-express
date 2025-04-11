@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Tasks {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  categoryId  Int?        @default(0)
+  category    Categories? @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+}
+
+model Categories {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String?
+  tasks       Tasks[]     @relation 
+}
