@@ -15,13 +15,11 @@ const {
 
 router.get('/GetTasks', getTasks);
 router.post('/AddTask', createTaskValidation, addTask);
-// Странная реализация в исходом апи, заменил ниже на PATCH, этот тоже оставил
-router.post('/UpdateTask', updateTaskValidation, updateTask);
-// Странная реализация в исходом апи, заменил ниже на DELETE, этот тоже оставил
-router.get('/RemoveTask/:id', deleteTaskValidation, removeTask);
-
-// дополнительно
 router.patch('/UpdateTask', updateTaskValidation, updateTask);
 router.delete('/RemoveTask/:id', deleteTaskValidation, removeTask);
+
+// Оставил эндпоинты из исходного апи
+router.post('/UpdateTask', updateTaskValidation, updateTask);
+router.get('/RemoveTask/:id', deleteTaskValidation, removeTask);
 
 module.exports = router;
