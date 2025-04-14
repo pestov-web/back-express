@@ -14,7 +14,7 @@ model Tasks {
   id          Int         @id @default(autoincrement())
   name        String
   description String?
-  categoryId  Int?        @default(0)
+  categoryId  Int?        
   category    Categories? @relation(fields: [categoryId], references: [id], onDelete: SetNull)
 }
 
