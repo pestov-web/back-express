@@ -9,6 +9,7 @@ exports.updateCategoryValidation = celebrate({
 });
 exports.createCategoryValidation = celebrate({
   [Segments.BODY]: Joi.object({
+    id: Joi.number().allow(null, ''),
     name: Joi.string().max(255).required(),
     description: Joi.string().allow(null, '').max(512),
   }),
