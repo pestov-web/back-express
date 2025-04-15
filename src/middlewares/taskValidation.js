@@ -5,7 +5,7 @@ exports.updateTaskValidation = celebrate({
     id: Joi.number().required(),
     name: Joi.string().max(255).required(),
     description: Joi.string().allow(null, '').max(512),
-    categoryId: Joi.number(),
+    categoryId: Joi.number().allow(null),
   }),
 });
 exports.createTaskValidation = celebrate({
@@ -13,7 +13,7 @@ exports.createTaskValidation = celebrate({
     id: Joi.number().allow(null, ''),
     name: Joi.string().max(255).required(),
     description: Joi.string().allow(null, '').max(512),
-    categoryId: Joi.number(),
+    categoryId: Joi.number().allow(null),
   }),
 });
 
