@@ -4,7 +4,7 @@ exports.updateTaskValidation = celebrate({
   [Segments.BODY]: Joi.object({
     id: Joi.number().required(),
     name: Joi.string().max(255).required(),
-    description: Joi.string().allow(null, '').max(512),
+    description: Joi.string().allow(null, '').max(1536),
     categoryId: Joi.number().allow(null),
   }),
 });
@@ -12,7 +12,7 @@ exports.createTaskValidation = celebrate({
   [Segments.BODY]: Joi.object({
     id: Joi.number().allow(null, ''),
     name: Joi.string().max(255).required(),
-    description: Joi.string().allow(null, '').max(512),
+    description: Joi.string().allow(null, '').max(1536),
     categoryId: Joi.number().allow(null),
   }),
 });
