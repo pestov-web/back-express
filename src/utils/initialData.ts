@@ -1,4 +1,13 @@
-const categories = [
+interface ICategory {
+  name: string;
+  description: string;
+}
+
+interface ITask extends ICategory {
+  categoryId: number;
+}
+
+const categories: ICategory[] = [
   {
     name: 'Категория 1',
     description: 'Описание категории 1',
@@ -33,7 +42,7 @@ const categories = [
   },
 ];
 
-const tasks = [
+const tasks: ITask[] = [
   {
     name: 'Задача 1',
     description: 'Описание задачи 1',
@@ -76,4 +85,4 @@ const tasks = [
   },
 ];
 
-module.exports = { categories, tasks };
+export { categories, tasks };

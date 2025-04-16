@@ -1,17 +1,18 @@
-const router = require('express').Router();
+import express from 'express';
+const router = express.Router();
 
-const {
+import {
   updateTaskValidation,
   createTaskValidation,
   deleteTaskValidation,
-} = require('../middlewares/taskValidation');
+} from '../middlewares/taskValidation';
 
-const {
+import {
   addTask,
   updateTask,
   removeTask,
   getTasks,
-} = require('../controllers/taskController');
+} from '../controllers/task.controller';
 
 router.get('/GetTasks', getTasks);
 router.post('/AddTask', createTaskValidation, addTask);
@@ -22,4 +23,4 @@ router.delete('/RemoveTask/:id', deleteTaskValidation, removeTask);
 router.post('/UpdateTask', updateTaskValidation, updateTask);
 router.get('/RemoveTask/:id', deleteTaskValidation, removeTask);
 
-module.exports = router;
+export default router;

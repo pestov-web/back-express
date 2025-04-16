@@ -1,6 +1,6 @@
-const { celebrate, Joi, Segments } = require('celebrate');
+import { celebrate, Joi, Segments } from 'celebrate';
 
-exports.updateTaskValidation = celebrate({
+const updateTaskValidation = celebrate({
   [Segments.BODY]: Joi.object({
     id: Joi.number().required(),
     name: Joi.string().max(255).required(),
@@ -8,7 +8,7 @@ exports.updateTaskValidation = celebrate({
     categoryId: Joi.number().allow(null),
   }),
 });
-exports.createTaskValidation = celebrate({
+const createTaskValidation = celebrate({
   [Segments.BODY]: Joi.object({
     id: Joi.number().allow(null, ''),
     name: Joi.string().max(255).required(),
@@ -17,8 +17,10 @@ exports.createTaskValidation = celebrate({
   }),
 });
 
-exports.deleteTaskValidation = celebrate({
+const deleteTaskValidation = celebrate({
   [Segments.PARAMS]: Joi.object({
     id: Joi.number().integer().required(),
   }),
 });
+
+export { updateTaskValidation, createTaskValidation, deleteTaskValidation };

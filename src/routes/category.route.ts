@@ -1,17 +1,18 @@
-const router = require('express').Router();
+import express from 'express';
+const router = express.Router();
 
-const {
+import {
   updateCategoryValidation,
   createCategoryValidation,
   deleteCategoryValidation,
-} = require('../middlewares/categoryValidation');
+} from '../middlewares/categoryValidation';
 
-const {
+import {
   addCategory,
   updateCategory,
   removeCategory,
   getCategories,
-} = require('../controllers/categoryController');
+} from '../controllers/category.controller';
 
 router.get('/GetCategories', getCategories);
 router.post('/AddCategory', createCategoryValidation, addCategory);
@@ -22,4 +23,4 @@ router.delete('/RemoveCategory/:id', deleteCategoryValidation, removeCategory);
 router.post('/UpdateCategory', updateCategoryValidation, updateCategory);
 router.get('/RemoveCategory/:id', deleteCategoryValidation, removeCategory);
 
-module.exports = router;
+export default router;

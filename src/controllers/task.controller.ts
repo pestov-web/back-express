@@ -1,6 +1,7 @@
-const { prisma } = require('../utils/prisma');
+import { Request, Response, NextFunction } from 'express';
+import prisma from '../utils/prisma';
 
-module.exports.addTask = async (req, res) => {
+const addTask = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, description = null, categoryId = null } = req.body;
     const newTask = await prisma.tasks.create({
@@ -16,7 +17,7 @@ module.exports.addTask = async (req, res) => {
   }
 };
 
-module.exports.updateTask = async (req, res) => {
+const updateTask = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const updatedTask = await prisma.tasks.update({
       where: {
@@ -34,11 +35,11 @@ module.exports.updateTask = async (req, res) => {
   }
 };
 
-module.exports.removeTask = async (req, res, next) => {
+const removeTask = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const removedTask = await prisma.tasks.delete({
       where: {
-        id: req.params.id,
+        id: Number(req.params.id),
       },
     });
     res.send(removedTask);
@@ -47,7 +48,7 @@ module.exports.removeTask = async (req, res, next) => {
   }
 };
 
-module.exports.getTasks = async (req, res) => {
+const getTasks = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const tasks = await prisma.tasks.findMany();
     res.send(tasks);
@@ -55,3 +56,5 @@ module.exports.getTasks = async (req, res) => {
     next(error);
   }
 };
+
+export { addTask, updateTask, removeTask, getTasks };
