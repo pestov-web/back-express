@@ -1,6 +1,7 @@
-const { prisma } = require('../utils/prisma');
+import { Request, Response, NextFunction } from 'express';
+import prisma from '../utils/prisma';
 
-module.exports.addCategory = async (req, res) => {
+const addCategory = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { name, description = null } = req.body;
     const newCategory = await prisma.categories.create({
@@ -15,7 +16,11 @@ module.exports.addCategory = async (req, res) => {
   }
 };
 
-module.exports.updateCategory = async (req, res) => {
+const updateCategory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const updatedCategory = await prisma.categories.update({
       where: {
@@ -32,20 +37,29 @@ module.exports.updateCategory = async (req, res) => {
   }
 };
 
-module.exports.removeCategory = async (req, res) => {
+const removeCategory = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const removedCategory = await prisma.categories.delete({
       where: {
-        id: req.params.id,
+        id: Number(req.params.id),
       },
     });
     res.send(removedCategory);
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
 
-module.exports.getCategories = async (req, res) => {
+const getCategories = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   try {
     const Categories = await prisma.categories.findMany();
     res.send(Categories);
@@ -53,3 +67,5 @@ module.exports.getCategories = async (req, res) => {
     next(error);
   }
 };
+
+export { addCategory, updateCategory, removeCategory, getCategories };

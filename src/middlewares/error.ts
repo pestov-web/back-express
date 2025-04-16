@@ -1,5 +1,6 @@
 // обработчик ошибок
-module.exports = (err, req, res, next) => {
+import { ErrorRequestHandler } from 'express';
+const errorHandler: ErrorRequestHandler = (err, req, res, next) => {
   if (err.status) {
     res.status(err.status).send({ message: err.message });
     return;
@@ -8,3 +9,5 @@ module.exports = (err, req, res, next) => {
 
   next();
 };
+
+export default errorHandler;

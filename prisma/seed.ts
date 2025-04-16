@@ -1,5 +1,5 @@
-const { PrismaClient } = require('@prisma/client');
-const { categories, tasks } = require('../src/utils/initialData');
+import { PrismaClient } from '@prisma/client';
+import { categories, tasks } from '../src/utils/initialData';
 
 const prisma = new PrismaClient();
 
